@@ -15,8 +15,9 @@ import {
   ArrowLeft,
   Quote
 } from 'lucide-react';
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'motion/react';
 
 // --- Utility Components ---
 
@@ -53,7 +54,7 @@ const Button = ({
   };
   
   return (
-    <button className={`${base} ${variants[variant]} ${className}`}>
+    <button onClick={onClick} className={`${base} ${variants[variant]} ${className}`}>
       {children}
     </button>
   );
@@ -72,7 +73,7 @@ const FadeIn = ({ children, delay = 0 }: { children: ReactNode; delay?: number }
 
 // --- Page Sections ---
 
-const Navbar = () => (
+const Navbar = ({ onBookCall }: { onBookCall: () => void }) => (
   <nav className="fixed top-0 left-0 right-0 z-50 py-6 px-6 md:px-12 lg:px-24 flex justify-between items-center bg-brand-bg/80 backdrop-blur-md border-b border-white/5">
     <Link to="/" className="group outline-none">
       <span className="font-display text-white font-bold tracking-tighter text-3xl leading-none">
@@ -92,14 +93,14 @@ const Navbar = () => (
           Case Studies
         </Button>
       </Link>
-      <Button variant="primary" className="px-5 py-2 text-[10px] !rounded-md uppercase tracking-widest font-bold">
+      <Button onClick={onBookCall} variant="primary" className="px-5 py-2 text-[10px] !rounded-md uppercase tracking-widest font-bold">
         Book Call
       </Button>
     </div>
   </nav>
 );
 
-const Hero = () => (
+const Hero = ({ onBookCall }: { onBookCall: () => void }) => (
   <Section className="pt-40 md:pt-52 pb-32 flex flex-col items-center text-center">
     <FadeIn>
       <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-brand-border mb-8 bg-brand-card/50">
@@ -122,7 +123,7 @@ const Hero = () => (
 
     <FadeIn delay={0.3}>
       <div className="flex flex-col sm:flex-row gap-4">
-        <Button>
+        <Button onClick={onBookCall}>
           Book a Call <ArrowUpRight className="w-4 h-4" />
         </Button>
         <Link to="/case-studies">
@@ -365,7 +366,7 @@ const Testimonials = () => (
   </Section>
 );
 
-const FinalCTA = () => (
+const FinalCTA = ({ onBookCall }: { onBookCall: () => void }) => (
   <Section className="!py-40">
     <div className="glass-card bg-linear-to-br from-zinc-900 to-black p-12 md:p-24 text-center rounded-3xl relative overflow-hidden">
       <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-[100px] -mr-32 -mt-32" />
@@ -375,7 +376,7 @@ const FinalCTA = () => (
           We only take on 3 new clients per quarter to ensure premium SME-led output. Book a strategy call to see if we're a fit for your authority goals.
         </p>
         <div className="flex justify-center">
-          <Button variant="primary" className="!px-12 !py-6 text-lg">
+          <Button onClick={onBookCall} variant="primary" className="!px-12 !py-6 text-lg">
             Book a strategy call <MessageSquare className="w-5 h-5 ml-2" />
           </Button>
         </div>
@@ -425,20 +426,20 @@ const Footer = () => (
 
 // --- Pages ---
 
-const Home = () => (
+const Home = ({ onBookCall }: { onBookCall: () => void }) => (
   <>
-    <Hero />
+    <Hero onBookCall={onBookCall} />
     <TrustStrip />
     <Services />
     <Positioning />
     <Process />
     <Work />
     <Testimonials />
-    <FinalCTA />
+    <FinalCTA onBookCall={onBookCall} />
   </>
 );
 
-const CaseStudiesPage = () => {
+const CaseStudiesPage = ({ onBookCall }: { onBookCall: () => void }) => {
   const cases = [
     {
       title: "Eliminating 'Implementation Terror'",
@@ -526,21 +527,90 @@ const CaseStudiesPage = () => {
           ))}
         </div>
       </Section>
-      <FinalCTA />
+      <FinalCTA onBookCall={onBookCall} />
     </div>
   );
 };
 
+const ContactModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => (
+  <AnimatePresence>
+    {isOpen && (
+      <div className="fixed inset-0 z-[100] flex items-center justify-center p-6">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={onClose}
+          className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+        />
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.95, y: 20 }}
+          className="relative w-full max-w-xl glass-card bg-brand-bg p-8 md:p-12 overflow-hidden"
+        >
+          <div className="absolute top-0 right-0 w-32 h-32 bg-amber-400/10 rounded-full blur-3xl -mr-16 -mt-16" />
+          
+          <button 
+            onClick={onClose}
+            className="absolute top-6 right-6 text-gray-500 hover:text-white transition-colors"
+          >
+            <ChevronRight className="w-6 h-6 rotate-180" />
+          </button>
+
+          <div className="relative z-10">
+            <h2 className="text-3xl md:text-4xl mb-4 font-display font-bold tracking-tight">The Authority Call.</h2>
+            <p className="text-gray-400 mb-10 leading-relaxed">
+              We aren't looking for projects. We are looking for founders ready to architect an owned asset empire. Leave your details or reach out directly.
+            </p>
+
+            <form className="space-y-4" onSubmit={(e) => {
+              e.preventDefault();
+              alert('Strategic intake received. Expect a clinical response within 24h.');
+              onClose();
+            }}>
+              <div>
+                <label className="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-2 block">Name</label>
+                <input required type="text" className="w-full bg-white/5 border border-white/10 rounded-lg p-4 text-white outline-none focus:border-white/25 transition-colors" placeholder="Founder Name" />
+              </div>
+              <div>
+                <label className="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-2 block">Email</label>
+                <input required type="email" className="w-full bg-white/5 border border-white/10 rounded-lg p-4 text-white outline-none focus:border-white/25 transition-colors" placeholder="founder@company.io" />
+              </div>
+              <div>
+                <label className="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-2 block">Worldview / Goal</label>
+                <textarea className="w-full bg-white/5 border border-white/10 rounded-lg p-4 text-white outline-none focus:border-white/25 transition-colors h-32 resize-none" placeholder="What authority gap are we closing?" />
+              </div>
+              <Button variant="primary" className="w-full !rounded-lg font-bold">
+                Submit Strategy Request
+              </Button>
+            </form>
+
+            <div className="mt-8 pt-8 border-t border-white/5 flex flex-col sm:flex-row justify-between gap-4 text-[10px] uppercase tracking-widest text-gray-500 font-bold">
+              <a href="mailto:hello@inklineauthority.io" className="hover:text-white transition-colors">hello@inklineauthority.io</a>
+              <span className="text-white/20 hidden sm:block">|</span>
+              <span>Global Client intake open</span>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    )}
+  </AnimatePresence>
+);
+
 export default function App() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <div className="selection:bg-white selection:text-black min-h-screen">
       <ScrollToTop />
-      <Navbar />
+      <Navbar onBookCall={() => setIsModalOpen(true)} />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/case-studies" element={<CaseStudiesPage />} />
+        <Route path="/" element={<Home onBookCall={() => setIsModalOpen(true)} />} />
+        <Route path="/case-studies" element={<CaseStudiesPage onBookCall={() => setIsModalOpen(true)} />} />
       </Routes>
       <Footer />
+      <ContactModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 }
