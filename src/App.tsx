@@ -483,8 +483,8 @@ const Footer = () => (
       <div>
         <h4 className="text-white font-bold text-xs uppercase tracking-[0.2em] mb-6">Contact</h4>
         <div className="space-y-4">
-          <a href="mailto:hello@inklineauthority.io" className="flex items-center gap-2 text-sm text-gray-500 hover:text-white transition-colors">
-            <Mail className="w-4 h-4" /> hello@inklineauthority.io
+          <a href="mailto:admin@inkline.co.in" className="flex items-center gap-2 text-sm text-gray-500 hover:text-white transition-colors">
+            <Mail className="w-4 h-4" /> admin@inkline.co.in
           </a>
           <a href="https://www.linkedin.com/company/inkline-co" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-gray-500 hover:text-white transition-colors">
             <Linkedin className="w-4 h-4" /> LinkedIn
@@ -495,7 +495,7 @@ const Footer = () => (
         <h4 className="text-white font-bold text-xs uppercase tracking-[0.2em] mb-6">Agency</h4>
         <ul className="space-y-4 text-sm text-gray-500">
           <li><Link to="/case-studies" className="hover:text-white transition-colors">Case Studies</Link></li>
-          <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
+          <li><Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
         </ul>
       </div>
     </div>
@@ -747,7 +747,77 @@ const CaseStudyDetail = () => {
   );
 };
 
+const PrivacyPolicy = () => (
+  <div className="pt-40 pb-24">
+    <Section>
+      <FadeIn>
+        <div className="max-w-3xl mx-auto">
+          <Link to="/" className="inline-flex items-center gap-2 text-gray-500 hover:text-white mb-16 transition-colors text-[10px] uppercase tracking-[0.4em] font-bold group">
+            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" /> Back to HQ
+          </Link>
 
+          <h1 className="text-5xl md:text-7xl tracking-tighter mb-12 font-display">Privacy <br /><span className="text-gray-500">Policy.</span></h1>
+
+          <div className="space-y-12 text-gray-400 leading-relaxed">
+            <p className="text-xl text-white/80 font-medium">At InkLine, we respect your privacy and are committed to protecting your personal information.</p>
+
+            <section className="space-y-4">
+              <h2 className="text-xs uppercase tracking-[0.3em] text-amber-500 font-bold mb-6">Information We Collect</h2>
+              <p>We may collect personal information such as your name, email address, company details, and any information you provide through contact forms or scheduling tools.</p>
+            </section>
+
+            <section className="space-y-4">
+              <h2 className="text-xs uppercase tracking-[0.3em] text-amber-500 font-bold mb-6">How We Use Your Information</h2>
+              <ul className="list-disc list-inside space-y-4 marker:text-amber-500">
+                <li>Respond to your inquiries</li>
+                <li>Schedule and manage meetings</li>
+                <li>Provide and improve our services</li>
+              </ul>
+            </section>
+
+            <section className="space-y-4">
+              <h2 className="text-xs uppercase tracking-[0.3em] text-amber-500 font-bold mb-6">Third-Party Tools</h2>
+              <p>We may use trusted third-party tools such as Calendly for scheduling and analytics tools to understand website usage. These tools may collect limited data as required for their functionality.</p>
+            </section>
+
+            <section className="space-y-4">
+              <h2 className="text-xs uppercase tracking-[0.3em] text-amber-500 font-bold mb-6">Data Sharing</h2>
+              <p>We do not sell, trade, or rent your personal information to third parties.</p>
+            </section>
+
+            <section className="space-y-4">
+              <h2 className="text-xs uppercase tracking-[0.3em] text-amber-500 font-bold mb-6">Cookies</h2>
+              <p>Our website may use cookies to enhance user experience and analyze website traffic.</p>
+            </section>
+
+            <section className="space-y-4">
+              <h2 className="text-xs uppercase tracking-[0.3em] text-amber-500 font-bold mb-6">Data Security</h2>
+              <p>We take reasonable measures to protect your personal information from unauthorized access or disclosure.</p>
+            </section>
+
+            <section className="space-y-4">
+              <h2 className="text-xs uppercase tracking-[0.3em] text-amber-500 font-bold mb-6">Your Rights</h2>
+              <p>You may request access to or deletion of your personal data at any time by contacting us.</p>
+            </section>
+
+            <section className="pt-20 border-t border-brand-border">
+              <h2 className="text-xs uppercase tracking-[0.3em] text-white font-bold mb-8">Contact Information</h2>
+              <div className="glass-card p-10 bg-zinc-900/50 border-brand-border">
+                <div className="space-y-1">
+                  <p className="text-xl text-white font-bold tracking-tight mb-2">InkLine</p>
+                  <p className="text-gray-500 mb-6 font-medium">Bangalore, KA</p>
+                  <a href="mailto:admin@inkline.co.in" className="inline-flex items-center gap-2 text-amber-500 font-bold hover:text-amber-400 transition-colors">
+                    <Mail className="w-4 h-4" /> admin@inkline.co.in
+                  </a>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </FadeIn>
+    </Section>
+  </div>
+);
 
 export default function App() {
   return (
@@ -758,6 +828,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/case-studies" element={<CaseStudiesIndex />} />
         <Route path="/case-studies/:id" element={<CaseStudyDetail />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
       </Routes>
       <Footer />
     </div>
