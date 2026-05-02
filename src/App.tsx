@@ -15,7 +15,7 @@ import {
   ArrowLeft,
   Quote
 } from 'lucide-react';
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState, Key } from 'react';
 import { Routes, Route, Link, useLocation, useParams } from 'react-router-dom';
 import { AnimatePresence } from 'motion/react';
 
@@ -60,7 +60,7 @@ const Button = ({
   );
 };
 
-const FadeIn = ({ children, delay = 0 }: { children: ReactNode; delay?: number; key?: React.Key }) => (
+const FadeIn = ({ children, delay = 0 }: { children: ReactNode; delay?: number; key?: Key }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -486,7 +486,7 @@ const Footer = () => (
           <a href="mailto:hello@inklineauthority.io" className="flex items-center gap-2 text-sm text-gray-500 hover:text-white transition-colors">
             <Mail className="w-4 h-4" /> hello@inklineauthority.io
           </a>
-          <a href="#" className="flex items-center gap-2 text-sm text-gray-500 hover:text-white transition-colors">
+          <a href="https://www.linkedin.com/company/inkline-co" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-gray-500 hover:text-white transition-colors">
             <Linkedin className="w-4 h-4" /> LinkedIn
           </a>
         </div>
