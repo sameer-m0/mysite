@@ -60,7 +60,7 @@ const Button = ({
   );
 };
 
-const FadeIn = ({ children, delay = 0 }: { children: ReactNode; delay?: number }) => (
+const FadeIn = ({ children, delay = 0 }: { children: ReactNode; delay?: number; key?: React.Key }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -137,12 +137,36 @@ const Hero = ({ onBookCall }: { onBookCall: () => void }) => (
 );
 
 const TrustStrip = () => (
-  <div className="border-y border-brand-border bg-black/50 py-12">
-    <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-50 grayscale hover:grayscale-0 transition-all duration-700">
-      <span className="font-display text-2xl font-bold tracking-tighter text-white">CRED</span>
-      <span className="font-display text-2xl font-bold tracking-tighter text-white uppercase italic">Zynga</span>
-      <span className="font-display text-2xl font-bold tracking-tighter text-white">mamaearth</span>
-      <span className="font-display text-2xl font-bold tracking-tighter text-white">Razorpay</span>
+  <div className="border-y border-brand-border bg-black/50 py-16">
+    <div className="max-w-7xl mx-auto px-6">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-y-12 gap-x-8 items-center justify-items-center opacity-30 grayscale hover:grayscale-0 transition-all duration-700">
+        {/* Row 1 */}
+        <span className="font-jakarta text-2xl font-extrabold tracking-[-0.08em] text-white uppercase">CRED</span>
+        
+        <div className="flex items-center gap-1">
+          <img src="https://cdn.simpleicons.org/zynga/white" className="h-5" alt="" referrerPolicy="no-referrer" />
+          <span className="font-sans text-xl font-black tracking-tighter text-white lowercase">zynga</span>
+        </div>
+
+        <span className="font-comfortaa text-xl font-bold text-white lowercase">mamaearth</span>
+
+        <div className="flex items-center gap-1.5">
+          <img src="https://cdn.simpleicons.org/razorpay/white" className="h-5" alt="" referrerPolicy="no-referrer" />
+          <span className="font-sans text-xl font-extrabold italic tracking-tighter text-white">Razorpay</span>
+        </div>
+
+        {/* Row 2 */}
+        <span className="font-syne text-xl font-extrabold tracking-tighter text-white uppercase">NeoSapien</span>
+
+        <span className="font-display text-xl font-light tracking-[0.15em] text-white uppercase">Mindcase</span>
+
+        <span className="font-sans text-lg font-black tracking-tight text-white">DailyObjects</span>
+
+        <div className="flex flex-col items-center">
+          <span className="font-display text-base font-black tracking-tighter text-white uppercase leading-none">Bonkers</span>
+          <span className="font-display text-[10px] font-bold tracking-[0.3em] text-white uppercase border-t border-white mt-0.5 pt-0.5">Corner</span>
+        </div>
+      </div>
     </div>
   </div>
 );
@@ -150,57 +174,54 @@ const TrustStrip = () => (
 const Services = () => {
   const services = [
     {
+      icon: <PenTool className="w-6 h-6 text-white" />,
+      title: "The Hook (Social)",
+      desc: "Founder ghostwriting, EGC, and high-value carousels that dominate LinkedIn feeds and capture mindshare.",
+      outcome: "Dominates LinkedIn feeds and drives top-of-funnel connection."
+    },
+    {
       icon: <Search className="w-6 h-6 text-white" />,
-      title: "Deep-Research (SEO & AEO)",
-      desc: "Original narratives that AI cannot hallucinate. We conduct SME interviews and analyze proprietary data to rank on Google and capture LLM crawlers.",
-      outcome: "Captures MOFU traffic and reduces enterprise 'Implementation Terror'."
+      title: "The Engine (MOFU)",
+      desc: "Deep-research articles and a high-converting website experience that answers questions and builds trust.",
+      outcome: "Reduces 'Implementation Terror' and educates prospects."
     },
     {
       icon: <Mail className="w-6 h-6 text-white" />,
-      title: "Substack (The BOFU Engine)",
-      desc: "Moving audiences from rented platforms to owned assets. Weekly deep-dives designed to build deep parasocial trust and high-conviction leads.",
-      outcome: "Turns passive readers into strategy session bookings."
+      title: "The Vault (BOFU)",
+      desc: "Premium Substack newsletters that convert rented social audiences into owned, high-intent buyers.",
+      outcome: "Turns passive readers into high-conviction pipeline."
     },
     {
-      icon: <PenTool className="w-6 h-6 text-white" />,
-      title: "Founder LinkedIn",
-      desc: "Executive presence management. Translating your unique worldview into punchy, scroll-stopping content via asynchronous voice notes.",
-      outcome: "Drives top-of-funnel awareness and direct partnership inquiries."
-    },
-    {
-      icon: <Zap className="w-6 h-6 text-white" />,
-      title: "EGC (Employee Content)",
-      desc: "Creating a 'surround-sound' effect. We build playbooks for your Sales and Eng teams to multiply your brand's organic reach effortlessly.",
-      outcome: "Humanizes the brand and proves deep bench strength."
+      icon: <TrendingUp className="w-6 h-6 text-white" />,
+      title: "The Accelerator (Paid)",
+      desc: "Precision Google Ads to capture active demand and drive immediate ROI through search intent.",
+      outcome: "Captures active demand exactly when buyers are searching."
     },
     {
       icon: <MonitorPlay className="w-6 h-6 text-white" />,
       title: "Carousel Posts",
-      desc: "High-contrast visual slides that distill complex frameworks into bite-sized playbooks optimized for dwell time and algorithm favor.",
-      outcome: "Highest engagement and save rates for tactical authority."
+      desc: "Highly visual distillations of complex frameworks, optimized for dwell time and algorithm favor.",
+      outcome: "Highest engagement and save rates on LinkedIn."
     },
     {
       icon: <Shield className="w-6 h-6 text-white" />,
-      title: "Corporate Management",
-      desc: "The official broadcast channel. Balancing product updates, case studies, and culture to provide necessary corporate validation.",
-      outcome: "Essential credibility for prospects performing due diligence."
-    },
-    {
-      icon: <TrendingUp className="w-6 h-6 text-white" />,
-      title: "Google Ads (Demand Capture)",
-      desc: "Capturing existing intent. Tightly themed ad groups focusing on pain points and competitor alternatives with high-conversion CRO.",
-      outcome: "Supplements organic efforts with instant visibility."
+      title: "EGC Playbooks",
+      desc: "Mobilizing your internal team (Sales, Eng, Product) to post consistently and humanize the brand.",
+      outcome: "Multiplies organic reach via 'surround-sound' effect."
     }
   ];
 
   return (
     <Section id="services">
       <div className="mb-20">
-        <span className="text-[10px] uppercase tracking-[0.4em] text-gray-500 font-bold mb-4 block">The Ecosystem</span>
+        <span className="text-[10px] uppercase tracking-[0.4em] text-gray-500 font-bold mb-4 block">Our Ecosystem</span>
         <h2 className="text-4xl md:text-5xl lg:text-7xl max-w-4xl tracking-tight">
-          Not just content. <br />
-          <span className="text-gray-500">A pipeline engine.</span>
+          An end-to-end <br />
+          <span className="text-gray-500">content ecosystem.</span>
         </h2>
+        <p className="text-xl text-gray-500 mt-8 max-w-2xl leading-relaxed">
+          We build the funnel that turns attention into pipeline:
+        </p>
       </div>
       
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -227,42 +248,71 @@ const Services = () => {
 };
 
 const Positioning = () => (
-  <Section id="positioning" className="bg-white text-black !max-w-none w-full">
-    <div className="max-w-7xl mx-auto">
-      <div className="grid lg:grid-cols-2 gap-16 items-center">
-        <FadeIn>
-          <h2 className="text-4xl md:text-6xl text-black leading-tight tracking-tighter">
-            AI made content easy. <br />
-            <span className="text-zinc-400">It also made it invisible.</span>
-          </h2>
-        </FadeIn>
-        <FadeIn delay={0.2}>
-          <div className="space-y-6">
-            <p className="text-xl md:text-2xl text-zinc-800 leading-relaxed">
-              Most agencies are just using LLMs to shout into the void. At InkLine, we conduct SME interviews to capture narratives that AI cannot hallucinate.
-            </p>
-            <p className="text-zinc-600 leading-relaxed font-medium">
-              We provide the hybrid strategy you need: human intelligence at the core, extracted from your real-world experience, and augmented by clinical distribution systems for scale. No generic prompts. Just high-signal authority.
-            </p>
-            <div className="flex flex-wrap gap-8 pt-4">
-              <div className="flex flex-col">
-                <span className="text-3xl font-display font-bold">100%</span>
-                <span className="text-[10px] uppercase tracking-wider text-zinc-500">Anti-Hallucination</span>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-3xl font-display font-bold">SME</span>
-                <span className="text-[10px] uppercase tracking-wider text-zinc-500">Interview Led</span>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-3xl font-display font-bold">BOFU</span>
-                <span className="text-[10px] uppercase tracking-wider text-zinc-500">Conversion Focus</span>
+  <div id="positioning">
+    {/* The Problem */}
+    <Section className="bg-white text-black !max-w-none w-full border-b border-zinc-200">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <FadeIn>
+            <h2 className="text-4xl md:text-6xl text-black leading-tight tracking-tighter">
+              Generative AI made content cheap. <br />
+              <span className="text-zinc-400">It also made your brand invisible.</span>
+            </h2>
+          </FadeIn>
+          <FadeIn delay={0.2}>
+            <div className="space-y-6">
+              <p className="text-xl md:text-2xl text-zinc-800 leading-relaxed font-medium">
+                Right now, your competitors are flooding the market with automated jargon, soulless articles, and robotic LinkedIn posts. The internet is drowning in noise.
+              </p>
+              <p className="text-zinc-600 leading-relaxed">
+                Buyers don't trust it, they scroll past it, and they definitely don't buy from it. If your brand sounds like a machine, you lose the deal before you even get on the calendar. Story sells software, but AI doesn't know your story.
+              </p>
+            </div>
+          </FadeIn>
+        </div>
+      </div>
+    </Section>
+
+    {/* The Solution */}
+    <Section className="bg-zinc-950 text-white !max-w-none w-full">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <FadeIn>
+            <div className="space-y-8">
+              <h2 className="text-4xl md:text-6xl leading-tight tracking-tighter">
+                We don’t build vanity metrics. <br />
+                <span className="text-gray-500">We build authority.</span>
+              </h2>
+              <div className="flex flex-wrap gap-8 pt-4">
+                <div className="flex flex-col">
+                  <span className="text-3xl font-display font-bold">1:1</span>
+                  <span className="text-[10px] uppercase tracking-wider text-gray-500">SME Interviews</span>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-3xl font-display font-bold">100%</span>
+                  <span className="text-[10px] uppercase tracking-wider text-gray-500">Human-Led</span>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-3xl font-display font-bold">Zero</span>
+                  <span className="text-[10px] uppercase tracking-wider text-gray-500">Hallucinations</span>
+                </div>
               </div>
             </div>
-          </div>
-        </FadeIn>
+          </FadeIn>
+          <FadeIn delay={0.2}>
+            <div className="space-y-6">
+              <p className="text-xl md:text-2xl text-gray-300 leading-relaxed font-medium">
+                We extract the raw, unfiltered expertise from your leadership team and translate it into high-impact content.
+              </p>
+              <p className="text-gray-500 leading-relaxed">
+                No fluffy jargon. No AI hallucinations. Just outcome-focused content that proves you actually know what you're talking about. We turn your unique worldview into an undeniable competitive advantage.
+              </p>
+            </div>
+          </FadeIn>
+        </div>
       </div>
-    </div>
-  </Section>
+    </Section>
+  </div>
 );
 
 const Process = () => {
@@ -306,8 +356,8 @@ const Work = () => (
   <Section id="work">
     <div className="flex flex-col lg:flex-row justify-between items-end mb-16 gap-6">
       <div className="max-w-2xl">
-        <span className="text-[10px] uppercase tracking-[0.4em] text-gray-500 font-bold mb-4 block">Proven Results</span>
-        <h2 className="text-4xl md:text-5xl">Moving from rented platforms to owned pipeline.</h2>
+        <span className="text-[10px] uppercase tracking-[0.4em] text-gray-500 font-bold mb-4 block">Featured Work</span>
+        <h2 className="text-4xl md:text-5xl">Content that closes.</h2>
       </div>
       <Link to="/case-studies">
         <Button variant="outline">Case Studies <ChevronRight className="w-4 h-4" /></Button>
@@ -316,8 +366,16 @@ const Work = () => (
 
     <div className="grid md:grid-cols-2 gap-8">
       {[
-        { label: "Fintech Growth", title: "Reduced enterprise 'Implementation Terror' and increased MOFU leads by 40%.", metric: "40%+" },
-        { label: "SaaS Authority", title: "Shortened sales cycle by 15% through a clinical BOFU Substack engine.", metric: "15%" }
+        { 
+          label: "NeoSapien (Wearable Tech)", 
+          title: "India's first AI-native wearable. Shifted from 'AI gadget' to 'Personal cognitive assistant'.", 
+          metric: "Early Adopters" 
+        },
+        { 
+          label: "Mindcase (Enterprise AI)", 
+          title: "Positioned as the Enterprise Intelligence Layer. Generated higher-quality inbound pipeline.", 
+          metric: "Demo Ready" 
+        }
       ].map((case_, i) => (
         <FadeIn key={i} delay={i * 0.2}>
           <Link to="/case-studies" className="block outline-none">
@@ -371,13 +429,13 @@ const FinalCTA = ({ onBookCall }: { onBookCall: () => void }) => (
     <div className="glass-card bg-linear-to-br from-zinc-900 to-black p-12 md:p-24 text-center rounded-3xl relative overflow-hidden">
       <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-[100px] -mr-32 -mt-32" />
       <div className="relative z-10">
-        <h2 className="text-4xl md:text-7xl mb-8 tracking-tighter">Ready to capture demand?</h2>
+        <h2 className="text-4xl md:text-7xl mb-8 tracking-tighter">Ready to stop blending in?</h2>
         <p className="text-gray-400 mb-12 max-w-xl mx-auto text-lg leading-relaxed">
-          We only take on 3 new clients per quarter to ensure premium SME-led output. Book a strategy call to see if we're a fit for your authority goals.
+          Stop letting bots dilute your life's work. Let's build a content engine that actually sounds like you. We only take on 3 new clients per quarter.
         </p>
         <div className="flex justify-center">
           <Button onClick={onBookCall} variant="primary" className="!px-12 !py-6 text-lg">
-            Book a strategy call <MessageSquare className="w-5 h-5 ml-2" />
+            Start Building Authority <MessageSquare className="w-5 h-5 ml-2" />
           </Button>
         </div>
       </div>
@@ -442,48 +500,95 @@ const Home = ({ onBookCall }: { onBookCall: () => void }) => (
 const CaseStudiesPage = ({ onBookCall }: { onBookCall: () => void }) => {
   const cases = [
     {
-      title: "Eliminating 'Implementation Terror'",
-      client: "Founder, Series C Neo-bank",
+      id: "neosapien",
+      title: "Category Creation for AI Wearables",
+      client: "NeoSapien (Wearable Startup)",
       stats: [
-        { label: "New Followers", val: "12,400+" },
-        { label: "Pipeline Value", val: "$1.2M" },
-        { label: "Sales Cycle Red.", val: "15%" }
+        { label: "Category", val: "AI-Native" },
+        { label: "Inbound", val: "High-Intent" },
+        { label: "Market", val: "India-First" }
       ],
-      challenge: "The founder had world-class ideas but enterprise buyers were spooked by implementation complexity. Their content was too high-level.",
-      solution: "We used SME interviews to build 'Tactical Authority' through deep-research articles and visual carousels that demystified the implementation process.",
-      outcome: "Within 6 months, the founder became the go-to authority for B2B fintech, reducing friction in the sales process and securing $1.2M in new pipeline."
+      challenge: "NeoSapien is India’s first AI-native wearable startup building the Neo 1—a screenless 'second brain'. They weren’t just selling a product—they were introducing a new category. But their messaging was trapped in technical jargon ('speaker diarisation', 'ambient AI') and feature-heavy explanations, leading to high curiosity but low trust.",
+      solution: "We reframed the narrative from 'how it works' to 'what it does to your life'. We took over Founder LinkedIn Ghostwriting, extracted real use cases from the founders' experiences (Memory, Productivity, Cognitive Load reduction), and layered it with a Substack newsletter that broke complex AI into human stories.",
+      outcome: "Successfully shifted perception from an 'AI gadget' to a 'Personal cognitive assistant'. This resulted in stronger emotional resonance with early users and significantly increased inbound curiosity from high-intent buyers and early adopters."
     },
     {
-      title: "The BOFU Substack Engine",
-      client: "CMO, Enterprise AI SaaS",
+      id: "mindcase",
+      title: "Enterprise Intelligence Layer",
+      client: "Mindcase (B2B AI Platform)",
       stats: [
-        { label: "Newsletter Growth", val: "800%" },
-        { label: "MQLs from Content", val: "45/mo" },
-        { label: "Owned Audience", val: "15K+" }
+        { label: "Conversion", val: "Pipeline+" },
+        { label: "Authority", val: "Expert-Led" },
+        { label: "Leads", val: "Enterprise" }
       ],
-      challenge: "Engaged on LinkedIn, but zero conversion control. The AI market noise made their standard content 'invisible'.",
-      solution: "We pivoted to an 'Owned Asset' strategy, launching a Substack focusing on 'Anti-Hype AI'—moving passive followers into a clinical email ecosystem.",
-      outcome: "The newsletter became their primary conversion driver, generating 45 high-intent MQLs per month and proving deep bench strength to prospects."
+      challenge: "Mindcase uses AI agents to convert unstructured web data into actionable enterprise intelligence. In a market flooded with 'AI wrappers', Mindcase had real depth but looked similar to competitors on the surface, risking being ignored by serious enterprise buyers.",
+      solution: "Deployed a Content-Led Growth system focusing on real workflows instead of features. Created deep-research articles and LinkedIn carousels breaking down how AI agents replace manual research. Positioned founders as experts in data intelligence—not just tool builders.",
+      outcome: "Shifted from being seen as an 'AI product' to an 'Enterprise intelligence layer'. This led to higher-quality inbound conversations and stronger credibility with enterprise buyers, significantly improving conversion from awareness to demo calls."
+    },
+    {
+      id: "dailyobjects",
+      title: "The Design + Manufacturing Engine",
+      client: "Daily Objects (D2C Lifestyle)",
+      stats: [
+        { label: "Targeting", val: "High-Intent" },
+        { label: "EGC Reach", val: "Surround-Sound" },
+        { label: "B2B Interest", val: "Increased" }
+      ],
+      challenge: "Daily Objects is a leading D2C lifestyle and tech accessories brand. Growth was heavily dependent on performance marketing, leading to limited organic authority and a weak B2B perception regarding their design and manufacturing excellence.",
+      solution: "Built a dual engine: Paid + Organic Authority. Targeted high-intent keywords via Google Ads for immediate ROI, while activating Employee Generated Content (EGC) playbooks for designers and supply chain leads to share behind-the-scenes stories and operational insights.",
+      outcome: "Repositioned from just a 'D2C brand' to a 'Design + Operations Leader'. This increased inbound B2B and partnership interest, reduced dependency on paid-only growth, and built stronger credibility across the ecosystem."
+    },
+    {
+      id: "bonkers",
+      title: "Scaling Executive Presence",
+      client: "Bonkers Corner (Streetwear)",
+      stats: [
+        { label: "Hiring", val: "Top-Tier" },
+        { label: "Waitlist", val: "Expansion" },
+        { label: "Growth", val: "D2C+" }
+      ],
+      challenge: "Bonkers Corner is a fast-growing youth-focused streetwear brand. The business was scaling, but leadership visibility wasn’t, making it harder to attract top-tier talent and missing leverage in offline expansion and partnership discussions.",
+      solution: "Built the founder's executive presence on LinkedIn. Converted weekly voice notes into content focused on retail expansion, inventory challenges, and youth culture insights—prioritizing real operator insights over generic brand posts.",
+      outcome: "Positioned the founder as a serious retail operator. This led to an increase in high-tier hiring interest and partnership conversations, established a stronger employer brand, and provided better leverage in offline expansion discussions."
     }
   ];
+
+  const scrollToCase = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <div className="pt-32 pb-24">
       <Section>
         <FadeIn>
           <Link to="/" className="inline-flex items-center gap-2 text-gray-500 hover:text-white mb-12 transition-colors text-sm group">
-            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" /> Back to Home
+            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" /> Back to Intelligence
           </Link>
-          <h1 className="text-5xl md:text-7xl mb-8">Clinical proof of authority.</h1>
-          <p className="text-xl text-gray-500 max-w-2xl leading-relaxed mb-20">
+          <h1 className="text-5xl md:text-7xl mb-8 tracking-tighter">Clinical proof of authority.</h1>
+          <p className="text-xl text-gray-500 max-w-2xl leading-relaxed mb-16">
             We don't deal in likes. We deal in pipeline, perception, and power. Explore how we’ve transformed voices into owned assets.
           </p>
+
+          {/* Selection Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-32">
+            {cases.map((c) => (
+              <button 
+                key={c.id} 
+                onClick={() => scrollToCase(c.id)}
+                className="glass-card p-6 text-left hover:border-white/30 transition-all group"
+              >
+                <div className="text-[10px] uppercase tracking-widest text-gray-500 mb-2">{c.client.split('(')[0]}</div>
+                <div className="text-sm font-bold group-hover:text-amber-400 transition-colors uppercase tracking-tight">{c.title}</div>
+              </button>
+            ))}
+          </div>
         </FadeIn>
 
-        <div className="space-y-32">
+        <div className="space-y-48">
           {cases.map((c, i) => (
             <FadeIn key={i} delay={0.1}>
-              <div className="grid lg:grid-cols-2 gap-16 items-start">
+              <div id={c.id} className="grid lg:grid-cols-2 gap-16 items-start scroll-mt-32">
                 <div className="space-y-12">
                   <div>
                     <span className="text-[10px] uppercase tracking-[0.4em] text-gray-500 font-bold mb-4 block">Case Study 0{i + 1}</span>
@@ -503,23 +608,23 @@ const CaseStudiesPage = ({ onBookCall }: { onBookCall: () => void }) => {
                   <div className="glass-card p-8 bg-white/[0.02]">
                     <Quote className="w-8 h-8 text-white/10 mb-6" />
                     <p className="text-lg text-gray-300 italic leading-relaxed">
-                      "InkLine took my scattered thoughts and turned them into a cohesive narrative that actually moves the needle on our business goals. They moved us from vanity to pipeline."
+                      "InkLine moved us from vanity to pipeline by extracting narratives our internal team didn't even know were there."
                     </p>
                   </div>
                 </div>
 
                 <div className="space-y-10 pt-4 lg:pt-20">
                   <div>
-                    <h3 className="text-sm uppercase tracking-widest text-white mb-4 border-b border-brand-border pb-2 w-fit">The Challenge</h3>
-                    <p className="text-gray-500 leading-relaxed">{c.challenge}</p>
+                    <h3 className="text-sm uppercase tracking-widest text-white mb-4 border-b border-brand-border pb-2 w-fit">The Problem</h3>
+                    <p className="text-gray-500 leading-relaxed font-medium">{c.challenge}</p>
                   </div>
                   <div>
-                    <h3 className="text-sm uppercase tracking-widest text-white mb-4 border-b border-brand-border pb-2 w-fit">Our Strategy</h3>
+                    <h3 className="text-sm uppercase tracking-widest text-white mb-4 border-b border-brand-border pb-2 w-fit">The InkLine Approach</h3>
                     <p className="text-gray-500 leading-relaxed font-medium text-white/80">{c.solution}</p>
                   </div>
                   <div>
-                    <h3 className="text-sm uppercase tracking-widest text-white mb-4 border-b border-brand-border pb-2 w-fit">The Outcome</h3>
-                    <p className="text-gray-500 leading-relaxed">{c.outcome}</p>
+                    <h3 className="text-sm uppercase tracking-widest text-amber-400 mb-4 border-b border-amber-400/20 pb-2 w-fit">The Outcome</h3>
+                    <p className="text-white leading-relaxed font-semibold text-lg">{c.outcome}</p>
                   </div>
                 </div>
               </div>
