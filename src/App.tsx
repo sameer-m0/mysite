@@ -93,11 +93,10 @@ const Navbar = () => {
       isScrolled ? 'bg-black/80 backdrop-blur-xl border-b border-white/5 py-4' : 'bg-transparent py-8'
     }`}>
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        <Link to="/" className="flex items-center gap-2 group outline-none">
-          <div className="w-8 h-8 bg-white flex items-center justify-center rounded-lg group-hover:rotate-12 transition-transform duration-500">
-            <span className="text-black font-black text-xl">I</span>
-          </div>
-          <span className="font-display font-black text-2xl tracking-tighter text-white">InkLine.</span>
+        <Link to="/" className="group outline-none">
+          <span className="font-display font-black text-2xl tracking-tighter text-white">
+            InkLine<span className="text-amber-500">.</span>
+          </span>
         </Link>
         <div className="flex items-center gap-10">
           <div className="hidden md:flex items-center gap-8">
@@ -474,7 +473,7 @@ const Footer = () => (
       <div className="col-span-1 lg:col-span-2">
         <Link to="/" className="group outline-none inline-block mb-6">
           <span className="font-display text-white font-bold tracking-tighter text-3xl leading-none">
-            InkLine<span className="text-amber-400">.</span>
+            InkLine<span className="text-amber-500">.</span>
           </span>
         </Link>
         <p className="text-gray-500 text-sm max-w-xs leading-relaxed">
