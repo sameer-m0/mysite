@@ -73,68 +73,87 @@ const FadeIn = ({ children, delay = 0 }: { children: ReactNode; delay?: number; 
 
 // --- Page Sections ---
 
-const Navbar = ({ onBookCall }: { onBookCall: () => void }) => (
-  <nav className="fixed top-0 left-0 right-0 z-50 py-6 px-6 md:px-12 lg:px-24 flex justify-between items-center bg-brand-bg/80 backdrop-blur-md border-b border-white/5">
-    <Link to="/" className="group outline-none">
-      <span className="font-display text-white font-bold tracking-tighter text-3xl leading-none">
-        InkLine<span className="text-amber-400">.</span>
-      </span>
-    </Link>
-    <div className="hidden md:flex gap-8 text-sm font-medium tracking-wide">
-      {['Services', 'Positioning', 'Process', 'Work'].map(item => (
-        <a key={item} href={`/#${item.toLowerCase()}`} className="hover:text-white transition-colors uppercase tracking-widest text-[10px]">
-          {item}
-        </a>
-      ))}
-    </div>
-    <div className="flex gap-4">
-      <Link to="/case-studies" className="hidden sm:block">
-        <Button variant="outline" className="px-5 py-2 text-[10px] !rounded-md uppercase tracking-widest">
-          Case Studies
-        </Button>
-      </Link>
-      <Button onClick={onBookCall} variant="primary" className="px-5 py-2 text-[10px] !rounded-md uppercase tracking-widest font-bold">
-        Book Call
-      </Button>
-    </div>
-  </nav>
-);
+const Navbar = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const { pathname } = useLocation();
+  const isCaseStudy = pathname.startsWith('/case-studies');
 
-const Hero = ({ onBookCall }: { onBookCall: () => void }) => (
-  <Section className="pt-40 md:pt-52 pb-32 flex flex-col items-center text-center">
-    <FadeIn>
-      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-brand-border mb-8 bg-brand-card/50">
-        <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-        <span className="text-[10px] uppercase tracking-[0.2em] font-medium text-gray-300">Available for Q3 Strategy</span>
-      </div>
-    </FadeIn>
-    
-    <FadeIn delay={0.1}>
-      <h1 className="text-5xl md:text-7xl lg:text-9xl leading-[1] mb-10 text-gradient max-w-5xl font-display tracking-[-0.05em]">
-        We help founders turn ideas into authority.
-      </h1>
-    </FadeIn>
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-    <FadeIn delay={0.2}>
-      <p className="text-lg md:text-xl text-gray-400 max-w-2xl mb-12 leading-relaxed">
-        Ghostwriting, content systems, and distribution strategies that drive visibility, credibility, and inbound leads. For the elite few who refuse to sound like AI noise.
-      </p>
-    </FadeIn>
+  const handleBookCall = () => {
+    window.open('https://calendly.com/inkline-schedule-call/30min', '_blank');
+  };
 
-    <FadeIn delay={0.3}>
-      <div className="flex flex-col sm:flex-row gap-4">
-        <Button onClick={onBookCall}>
-          Book a Call <ArrowUpRight className="w-4 h-4" />
-        </Button>
-        <Link to="/case-studies">
-          <Button variant="outline">
-            View Work
-          </Button>
+  return (
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      isScrolled ? 'bg-black/80 backdrop-blur-xl border-b border-white/5 py-4' : 'bg-transparent py-8'
+    }`}>
+      <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+        <Link to="/" className="flex items-center gap-2 group outline-none">
+          <div className="w-8 h-8 bg-white flex items-center justify-center rounded-lg group-hover:rotate-12 transition-transform duration-500">
+            <span className="text-black font-black text-xl">I</span>
+          </div>
+          <span className="font-display font-black text-2xl tracking-tighter text-white">InkLine.</span>
         </Link>
+        <div className="flex items-center gap-10">
+          <div className="hidden md:flex items-center gap-8">
+            <a href="/#services" className="text-[10px] uppercase tracking-[0.3em] text-gray-500 hover:text-white font-bold transition-colors">Services</a>
+            <Link to="/case-studies" className={`text-[10px] uppercase tracking-[0.3em] font-bold transition-colors ${isCaseStudy ? 'text-white' : 'text-gray-500 hover:text-white'}`}>Case Studies</Link>
+          </div>
+          <Button variant="primary" onClick={handleBookCall} className="px-6 py-2 text-[10px] !rounded-md uppercase tracking-widest font-bold">
+            Book Call
+          </Button>
+        </div>
       </div>
-    </FadeIn>
-  </Section>
-);
+    </nav>
+  );
+};
+
+const Hero = () => {
+  const handleBookCall = () => {
+    window.open('https://calendly.com/inkline-schedule-call/30min', '_blank');
+  };
+
+  return (
+    <Section className="pt-40 md:pt-52 pb-32 flex flex-col items-center text-center">
+      <FadeIn>
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-brand-border mb-8 bg-brand-card/50">
+          <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+          <span className="text-[10px] uppercase tracking-[0.2em] font-medium text-gray-300">Available for Q3 Strategy</span>
+        </div>
+      </FadeIn>
+      
+      <FadeIn delay={0.1}>
+        <h1 className="text-5xl md:text-7xl lg:text-9xl leading-[1] mb-10 text-gradient max-w-5xl font-display tracking-[-0.05em]">
+          We help founders turn ideas into authority.
+        </h1>
+      </FadeIn>
+
+      <FadeIn delay={0.2}>
+        <p className="text-lg md:text-xl text-gray-400 max-w-2xl mb-12 leading-relaxed">
+          Ghostwriting, content systems, and distribution strategies that drive visibility, credibility, and inbound leads. For the elite few who refuse to sound like AI noise.
+        </p>
+      </FadeIn>
+
+      <FadeIn delay={0.3}>
+        <div className="flex flex-col sm:flex-row gap-4">
+          <Button onClick={handleBookCall}>
+            Book a Call <ArrowUpRight className="w-4 h-4" />
+          </Button>
+          <Link to="/case-studies">
+            <Button variant="outline">
+              View Work
+            </Button>
+          </Link>
+        </div>
+      </FadeIn>
+    </Section>
+  );
+};
 
 const TrustStrip = () => (
   <div className="border-y border-brand-border bg-black/50 py-16">
@@ -424,24 +443,30 @@ const Testimonials = () => (
   </Section>
 );
 
-const FinalCTA = ({ onBookCall }: { onBookCall: () => void }) => (
-  <Section className="!py-40">
-    <div className="glass-card bg-linear-to-br from-zinc-900 to-black p-12 md:p-24 text-center rounded-3xl relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-[100px] -mr-32 -mt-32" />
-      <div className="relative z-10">
-        <h2 className="text-4xl md:text-7xl mb-8 tracking-tighter font-display leading-none">Ready to stop <span className="text-gray-500 italic">blending in?</span></h2>
-        <p className="text-gray-400 mb-12 max-w-xl mx-auto text-lg leading-relaxed">
-          Stop letting bots dilute your life's work. Let's build a content engine that actually sounds like you. We only take on 3 new clients per quarter.
-        </p>
-        <div className="flex justify-center">
-          <Button onClick={onBookCall} variant="primary" className="!px-12 !py-6 text-lg">
-            Start Building Authority <MessageSquare className="w-5 h-5 ml-2" />
-          </Button>
+const FinalCTA = () => {
+  const handleBookCall = () => {
+    window.open('https://calendly.com/inkline-schedule-call/30min', '_blank');
+  };
+
+  return (
+    <Section className="!py-40">
+      <div className="glass-card bg-linear-to-br from-zinc-900 to-black p-12 md:p-24 text-center rounded-3xl relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-[100px] -mr-32 -mt-32" />
+        <div className="relative z-10">
+          <h2 className="text-4xl md:text-7xl mb-8 tracking-tighter font-display leading-none">Ready to stop <span className="text-gray-500 italic">blending in?</span></h2>
+          <p className="text-gray-400 mb-12 max-w-xl mx-auto text-lg leading-relaxed">
+            Stop letting bots dilute your life's work. Let's build a content engine that actually sounds like you. We only take on 3 new clients per quarter.
+          </p>
+          <div className="flex justify-center">
+            <Button onClick={handleBookCall} variant="primary" className="!px-12 !py-6 text-lg">
+              Start Building Authority <MessageSquare className="w-5 h-5 ml-2" />
+            </Button>
+          </div>
         </div>
       </div>
-    </div>
-  </Section>
-);
+    </Section>
+  );
+};
 
 const Footer = () => (
   <footer className="py-20 px-6 md:px-12 lg:px-24 border-t border-brand-border bg-black">
@@ -484,16 +509,16 @@ const Footer = () => (
 
 // --- Pages ---
 
-const Home = ({ onBookCall }: { onBookCall: () => void }) => (
+const Home = () => (
   <>
-    <Hero onBookCall={onBookCall} />
+    <Hero />
     <TrustStrip />
     <Services />
     <Positioning />
     <Process />
     <Work />
     <Testimonials />
-    <FinalCTA onBookCall={onBookCall} />
+    <FinalCTA />
   </>
 );
 
@@ -623,11 +648,15 @@ const CaseStudiesIndex = () => {
   );
 };
 
-const CaseStudyDetail = ({ onBookCall }: { onBookCall: () => void }) => {
+const CaseStudyDetail = () => {
   const { id } = useParams();
   const c = CASE_STUDIES.find(item => item.id === id);
 
   if (!c) return <div className="pt-40 text-center text-gray-500">Case study not found.</div>;
+
+  const handleBookCall = () => {
+    window.open('https://calendly.com/inkline-schedule-call/30min', '_blank');
+  };
 
   return (
     <div className="pt-40 pb-24">
@@ -706,7 +735,7 @@ const CaseStudyDetail = ({ onBookCall }: { onBookCall: () => void }) => {
                       "InkLine moved us from vanity to pipeline by extracting narratives our team missed."
                     </p>
                   </div>
-                  <Button onClick={onBookCall} variant="primary" className="!px-10 !py-5 text-base rounded-2xl">
+                  <Button onClick={handleBookCall} variant="primary" className="!px-10 !py-5 text-base rounded-2xl">
                     Request Strategy Call
                   </Button>
                 </div>
@@ -719,86 +748,19 @@ const CaseStudyDetail = ({ onBookCall }: { onBookCall: () => void }) => {
   );
 };
 
-const ContactModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => (
-  <AnimatePresence>
-    {isOpen && (
-      <div className="fixed inset-0 z-[100] flex items-center justify-center p-6">
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={onClose}
-          className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-        />
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.95, y: 20 }}
-          className="relative w-full max-w-xl glass-card bg-brand-bg p-8 md:p-12 overflow-hidden"
-        >
-          <div className="absolute top-0 right-0 w-32 h-32 bg-amber-400/10 rounded-full blur-3xl -mr-16 -mt-16" />
-          
-          <button 
-            onClick={onClose}
-            className="absolute top-6 right-6 text-gray-500 hover:text-white transition-colors"
-          >
-            <ChevronRight className="w-6 h-6 rotate-180" />
-          </button>
 
-          <div className="relative z-10">
-            <h2 className="text-3xl md:text-4xl mb-4 font-display font-bold tracking-tight">The Authority Call.</h2>
-            <p className="text-gray-400 mb-10 leading-relaxed">
-              We aren't looking for projects. We are looking for founders ready to architect an owned asset empire. Leave your details or reach out directly.
-            </p>
-
-            <form className="space-y-4" onSubmit={(e) => {
-              e.preventDefault();
-              alert('Strategic intake received. Expect a clinical response within 24h.');
-              onClose();
-            }}>
-              <div>
-                <label className="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-2 block">Name</label>
-                <input required type="text" className="w-full bg-white/5 border border-white/10 rounded-lg p-4 text-white outline-none focus:border-white/25 transition-colors" placeholder="Founder Name" />
-              </div>
-              <div>
-                <label className="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-2 block">Email</label>
-                <input required type="email" className="w-full bg-white/5 border border-white/10 rounded-lg p-4 text-white outline-none focus:border-white/25 transition-colors" placeholder="founder@company.io" />
-              </div>
-              <div>
-                <label className="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-2 block">Worldview / Goal</label>
-                <textarea className="w-full bg-white/5 border border-white/10 rounded-lg p-4 text-white outline-none focus:border-white/25 transition-colors h-32 resize-none" placeholder="What authority gap are we closing?" />
-              </div>
-              <Button variant="primary" className="w-full !rounded-lg font-bold">
-                Submit Strategy Request
-              </Button>
-            </form>
-
-            <div className="mt-8 pt-8 border-t border-white/5 flex flex-col sm:flex-row justify-between gap-4 text-[10px] uppercase tracking-widest text-gray-500 font-bold">
-              <a href="mailto:hello@inklineauthority.io" className="hover:text-white transition-colors">hello@inklineauthority.io</a>
-              <span className="text-white/20 hidden sm:block">|</span>
-              <span>Global Client intake open</span>
-            </div>
-          </div>
-        </motion.div>
-      </div>
-    )}
-  </AnimatePresence>
-);
 
 export default function App() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
   return (
     <div className="selection:bg-white selection:text-black min-h-screen">
       <ScrollToTop />
-      <Navbar onBookCall={() => setIsModalOpen(true)} />
+      <Navbar />
       <Routes>
-        <Route path="/" element={<Home onBookCall={() => setIsModalOpen(true)} />} />
+        <Route path="/" element={<Home />} />
         <Route path="/case-studies" element={<CaseStudiesIndex />} />
-        <Route path="/case-studies/:id" element={<CaseStudyDetail onBookCall={() => setIsModalOpen(true)} />} />
+        <Route path="/case-studies/:id" element={<CaseStudyDetail />} />
       </Routes>
       <Footer />
-      <ContactModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 }
