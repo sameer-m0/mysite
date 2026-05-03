@@ -157,30 +157,24 @@ const Hero = () => {
 const TrustStrip = () => (
   <div className="border-y border-brand-border bg-black/50 py-16">
     <div className="max-w-7xl mx-auto px-6">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-y-12 gap-x-8 items-center justify-items-center opacity-30 grayscale hover:grayscale-0 transition-all duration-700">
-        {/* Row 1 */}
-        <span className="font-jakarta text-2xl font-extrabold tracking-[-0.08em] text-white uppercase">CRED</span>
+      <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16 lg:gap-20 opacity-30 grayscale hover:grayscale-0 transition-all duration-700">
+        {/* Logos */}
+        <span className="font-jakarta text-2xl font-extrabold tracking-[-0.08em] text-white uppercase whitespace-nowrap">CRED</span>
         
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1 whitespace-nowrap">
           <img src="https://cdn.simpleicons.org/zynga/white" className="h-5" alt="" referrerPolicy="no-referrer" />
           <span className="font-sans text-xl font-black tracking-tighter text-white lowercase">zynga</span>
         </div>
 
-        <span className="font-comfortaa text-xl font-bold text-white lowercase">mamaearth</span>
+        <span className="font-comfortaa text-xl font-bold text-white lowercase whitespace-nowrap">mamaearth</span>
 
-        <div className="flex items-center gap-1.5">
-          <img src="https://cdn.simpleicons.org/razorpay/white" className="h-5" alt="" referrerPolicy="no-referrer" />
-          <span className="font-sans text-xl font-extrabold italic tracking-tighter text-white">Razorpay</span>
-        </div>
+        <span className="font-syne text-xl font-extrabold tracking-tighter text-white uppercase whitespace-nowrap">NeoSapien</span>
 
-        {/* Row 2 */}
-        <span className="font-syne text-xl font-extrabold tracking-tighter text-white uppercase">NeoSapien</span>
+        <span className="font-display text-xl font-light tracking-[0.15em] text-white uppercase whitespace-nowrap">Mindcase</span>
 
-        <span className="font-display text-xl font-light tracking-[0.15em] text-white uppercase">Mindcase</span>
+        <span className="font-sans text-lg font-black tracking-tight text-white whitespace-nowrap">DailyObjects</span>
 
-        <span className="font-sans text-lg font-black tracking-tight text-white">DailyObjects</span>
-
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center whitespace-nowrap">
           <span className="font-display text-base font-black tracking-tighter text-white uppercase leading-none">Bonkers</span>
           <span className="font-display text-[10px] font-bold tracking-[0.3em] text-white uppercase border-t border-white mt-0.5 pt-0.5">Corner</span>
         </div>
@@ -726,18 +720,10 @@ const CaseStudyDetail = () => {
                 </div>
               </section>
 
-              <section className="pt-32 border-t border-brand-border">
-                <div className="flex flex-col md:flex-row items-center justify-between gap-12">
-                  <div className="flex items-start gap-8">
-                    <Quote className="w-12 h-12 text-amber-500/20 shrink-0 mt-2" />
-                    <p className="text-xl md:text-2xl text-gray-400 italic max-w-xl leading-relaxed">
-                      "InkLine moved us from vanity to pipeline by extracting narratives our team missed."
-                    </p>
-                  </div>
-                  <Button onClick={handleBookCall} variant="primary" className="!px-10 !py-5 text-base rounded-2xl">
-                    Request Strategy Call
-                  </Button>
-                </div>
+              <section className="pt-32 border-t border-brand-border flex justify-center">
+                <Button onClick={handleBookCall} variant="primary" className="!px-10 !py-5 text-base rounded-2xl">
+                  Request Strategy Call
+                </Button>
               </section>
             </div>
           </div>
