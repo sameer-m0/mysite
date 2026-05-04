@@ -12,8 +12,7 @@ import {
   Search, 
   MonitorPlay, 
   PenTool,
-  ArrowLeft,
-  Quote
+  ArrowLeft
 } from 'lucide-react';
 import { ReactNode, useEffect, useState, Key } from 'react';
 import { Routes, Route, Link, useLocation, useParams } from 'react-router-dom';
@@ -414,27 +413,6 @@ const Work = () => (
   </Section>
 );
 
-const Testimonials = () => (
-  <Section className="border-t border-brand-border !py-32">
-    <div className="grid lg:grid-cols-3 gap-12">
-      {[
-        { text: "InkLine didn't just write for me; they helped me move my audience from a rented platform to a high-conviction owned asset.", author: "CEO, Series C Fintech" },
-        { text: "The SME interview process is clinical. They extracted narratives our internal team didn't even know were there.", author: "Founder, Zynga-backed startup" },
-        { text: "We achieved 'surround-sound' visibility across our sales and engineering teams in 90 days. The EGC playbook is a game changer.", author: "CMO, Enterprise SaaS" }
-      ].map((t, i) => (
-        <FadeIn key={i} delay={i * 0.1}>
-          <div className="p-8 border-l border-brand-border space-y-6">
-            <p className="text-lg italic text-gray-300 leading-relaxed">"{t.text}"</p>
-            <div className="pt-4">
-              <div className="text-white font-bold text-sm tracking-tight">{t.author}</div>
-              <div className="text-[10px] uppercase tracking-widest text-gray-500 mt-1">Verified Client</div>
-            </div>
-          </div>
-        </FadeIn>
-      ))}
-    </div>
-  </Section>
-);
 
 const FinalCTA = () => {
   const handleBookCall = () => {
@@ -510,7 +488,6 @@ const Home = () => (
     <Positioning />
     <Process />
     <Work />
-    <Testimonials />
     <FinalCTA />
   </>
 );
@@ -526,7 +503,7 @@ const CASE_STUDIES = [
       { label: "Inbound", val: "High-Intent" },
       { label: "Market", val: "India-First" }
     ],
-    challenge: "NeoSapien is India’s first AI-native wearable startup building the Neo 1—a screenless 'second brain'. They weren’t just selling a product—they were introducing a new category. But their messaging was trapped in technical jargon ('speaker diarisation', 'ambient AI') and feature-heavy explanations, leading to high curiosity but low trust.",
+    challenge: "NeoSapien is India’s first AI-native wearable startup building the Neo 1, a screenless 'second brain'. They weren’t just selling a product; they were introducing a new category. But their messaging was trapped in technical jargon ('speaker diarisation', 'ambient AI') and feature-heavy explanations, leading to high curiosity but low trust.",
     solution: "We reframed the narrative from 'how it works' to 'what it does to your life'. We took over Founder LinkedIn Ghostwriting, extracted real use cases from the founders' experiences (Memory, Productivity, Cognitive Load reduction), and layered it with a Substack newsletter that broke complex AI into human stories.",
     outcome: "Successfully shifted perception from an 'AI gadget' to a 'Personal cognitive assistant'. This resulted in stronger emotional resonance with early users and significantly increased inbound curiosity from high-intent buyers and early adopters."
   },
@@ -541,7 +518,7 @@ const CASE_STUDIES = [
       { label: "Leads", val: "Enterprise" }
     ],
     challenge: "Mindcase uses AI agents to convert unstructured web data into actionable enterprise intelligence. In a market flooded with 'AI wrappers', Mindcase had real depth but looked similar to competitors on the surface, risking being ignored by serious enterprise buyers.",
-    solution: "Deployed a Content-Led Growth system focusing on real workflows instead of features. Created deep-research articles and LinkedIn carousels breaking down how AI agents replace manual research. Positioned founders as experts in data intelligence—not just tool builders.",
+    solution: "Deployed a Content-Led Growth system focusing on real workflows instead of features. Created deep-research articles and LinkedIn carousels breaking down how AI agents replace manual research. Positioned founders as experts in data intelligence, not just tool builders.",
     outcome: "Shifted from being seen as an 'AI product' to an 'Enterprise intelligence layer'. This led to higher-quality inbound conversations and stronger credibility with enterprise buyers, significantly improving conversion from awareness to demo calls."
   },
   {
@@ -569,7 +546,7 @@ const CASE_STUDIES = [
       { label: "Growth", val: "D2C+" }
     ],
     challenge: "Bonkers Corner is a fast-growing youth-focused streetwear brand. The business was scaling, but leadership visibility wasn’t, making it harder to attract top-tier talent and missing leverage in offline expansion and partnership discussions.",
-    solution: "Built the founder's executive presence on LinkedIn. Converted weekly voice notes into content focused on retail expansion, inventory challenges, and youth culture insights—prioritizing real operator insights over generic brand posts.",
+    solution: "Built the founder's executive presence on LinkedIn. Converted weekly voice notes into content focused on retail expansion, inventory challenges, and youth culture insights, prioritizing real operator insights over generic brand posts.",
     outcome: "Positioned the founder as a serious retail operator. This led to an increase in high-tier hiring interest and partnership conversations, established a stronger employer brand, and provided better leverage in offline expansion discussions."
   }
 ];
